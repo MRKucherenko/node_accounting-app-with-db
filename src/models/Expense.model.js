@@ -1,49 +1,47 @@
 'use strict';
 
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../db');
+const { sequelize } = require('../db.js');
 
 const Expense = sequelize.define(
   'Expense',
   {
     id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
+
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
     },
+
     spentAt: {
       type: DataTypes.DATE,
       allowNull: false,
     },
+
     title: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        notEmpty: false,
-      },
+      allowNull: false,
     },
+
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        min: 1,
-      },
     },
-    category: {
-      type: DataTypes.STRING,
+
+    categoryId: {
+      type: DataTypes.INTEGER,
       allowNull: true,
-      validate: {
-        notEmpty: false,
+      references: {
+        model: 'category',
+        key: 'id',
       },
     },
+
     note: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -51,20 +49,11 @@ const Expense = sequelize.define(
   },
   {
     tableName: 'expenses',
-    timestamps: false,
-    underscored: true,
-    indexes: [
-      {
-        fields: ['user_id'],
-      },
-      {
-        fields: ['spent_at'],
-      },
-      {
-        fields: ['category'],
-      },
-    ],
+    createdAt: false,
+    updatedAt: false,
   },
 );
 
-module.exports = Expense;
+module.exports = {
+  Expense,
+};

@@ -8,22 +8,22 @@ const User = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
     },
   },
   {
     tableName: 'users',
-    timestamps: true,
-    underscored: true,
+    createdAt: false,
+    updatedAt: false,
   },
 );
 
-module.exports = User;
+module.exports = {
+  User,
+};
