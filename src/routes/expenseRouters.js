@@ -14,7 +14,6 @@ expenseRouter.patch(
   '/:id',
   isValidId,
   express.json(),
-  isValidBody,
   expenseControllers.updateExp,
 );
 

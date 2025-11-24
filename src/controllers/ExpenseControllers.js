@@ -45,10 +45,10 @@ const updateExp = async (req, res) => {
     const updated = await expenseService.update(id, req.body);
 
     if (!updated) {
-      return res.status(404).send('expense for update not found');
+      return res.status(404).send('Expense not found');
     }
 
-    res.status(200).send(updated);
+    res.status(200).json(updated);
   } catch (error) {
     res.status(500).send('Internal server error');
   }
