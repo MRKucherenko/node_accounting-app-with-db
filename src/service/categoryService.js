@@ -32,9 +32,9 @@ const getByName = async (input) => {
 };
 
 const getAll = async () => {
-  const caregory = await Category.findAll();
+  const category = await Category.findAll();
 
-  return caregory;
+  return category;
 };
 
 const getById = async (id) => {

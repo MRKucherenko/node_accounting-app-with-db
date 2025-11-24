@@ -32,7 +32,13 @@ const isValidBody = (req, res, next) => {
       const { userId, spentAt, title, amount } = body;
 
       return (
-        userId !== null && spentAt !== null && title !== null && amount !== null
+        userId != null &&
+        spentAt != null &&
+        title != null &&
+        amount != null &&
+        typeof userId === 'number' &&
+        typeof amount === 'number' &&
+        typeof title === 'string'
       );
     },
   };

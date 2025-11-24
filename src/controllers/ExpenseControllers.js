@@ -1,10 +1,10 @@
 const expenseService = require('../service/expenseService');
 
 const getAllExps = async (req, res) => {
-  const querry = req.query;
+  const query = req.query;
 
   try {
-    const exps = await expenseService.getAll(querry);
+    const exps = await expenseService.getAll(query);
 
     res.status(200).json(exps);
   } catch (error) {
@@ -34,7 +34,7 @@ const addEx = async (req, res) => {
 
     res.status(201).json(newEx);
   } catch (error) {
-    res.status(400).send('Exp not added!');
+    res.status(400).send(error.message || 'Expense not added');
   }
 };
 
@@ -45,7 +45,7 @@ const updateExp = async (req, res) => {
     const updated = await expenseService.update(id, req.body);
 
     if (!updated) {
-      return res.status(404).send('exp for update not found');
+      return res.status(404).send('expense for update not found');
     }
 
     res.status(200).send(updated);
@@ -61,7 +61,7 @@ const removeExp = async (req, res) => {
     const deletedCount = await expenseService.remove(id);
 
     if (deletedCount === 0) {
-      return res.status(404).send('Exp not exist!');
+      return res.status(404).send('Expense not exist!');
     }
 
     res.status(204).end();
